@@ -399,10 +399,10 @@
         currentSrc: '', 
         isVideo: false,
         // Loops generating the programmatic files for project
-        basicImages: Array.from({length: 4}, (_, i) => `images/basic-wrap/photo${i+1}.webp`),
-        thematicImages: Array.from({length: 20}, (_, i) => `images/thematic/photo${i+1}.webp`),
-        familyImages: Array.from({length: 20}, (_, i) => `images/family/photo${i+1}.webp`),
-        videos: Array.from({length: 4}, (_, i) => `/videos/video${i+1}.mp4`),
+        basicImages: Array.from({length: 6}, (_, i) => `images/basic-wrap/photo${i+1}.webp`),
+        thematicImages: Array.from({length: 6}, (_, i) => `images/thematic/photo${i+1}.webp`),
+        familyImages: Array.from({length: 6}, (_, i) => `images/family/photo${i+1}.webp`),
+        videos: Array.from({length: 6}, (_, i) => `/videos/video${i+1}.mp4`),
         openLightbox(src, isVid = false) {
             this.currentSrc = src;
             this.isVideo = isVid;
