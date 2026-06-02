@@ -393,16 +393,23 @@
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="py-24 bg-white" x-data="{ 
+<section id="gallery" class="py-24 bg-white" x-data="{ 
         activeTab: 'basic', 
         isOpen: false, 
         currentSrc: '', 
         isVideo: false,
-        // Loops generating the programmatic files for project
         basicImages: Array.from({length: 6}, (_, i) => `images/basic-wrap/photo${i+1}.webp`),
         thematicImages: Array.from({length: 6}, (_, i) => `images/thematic/photo${i+1}.webp`),
         familyImages: Array.from({length: 6}, (_, i) => `images/family/photo${i+1}.webp`),
-        videos: Array.from({length: 6}, (_, i) => `/videos/video${i+1}.mp4`),
+        
+        // GANTI Kode di dalam tanda petik ini dengan ID Video YouTube Ayah & Bunda nanti
+        youtubeVideos: [
+            'https://youtu.be/g09cDtnIwfw?si=WeMTQ7w0kfChNSNa', // ID Video 1
+            'https://youtu.be/njcmQk1_iMI?si=oAk7eJgPw5_FEP-T', // ID Video 2
+            'https://youtu.be/qQBJQlCbqsE?si=f6psc6oveJQM18q0', // ID Video 3
+            'https://youtu.be/bGUBwQBSNhw?si=fQhGZCmYK-wgH5YE'  // ID Video 4
+        ],
+        
         openLightbox(src, isVid = false) {
             this.currentSrc = src;
             this.isVideo = isVid;
@@ -414,9 +421,85 @@
                 <span class="text-xs tracking-widest uppercase font-semibold text-brand-accent">Portofolio Karya Kami</span>
                 <h2 class="font-serif text-3xl sm:text-4xl text-brand-text font-normal">Sentuhan Keindahan Seni Foto Dipi</h2>
                 <p class="text-sm text-brand-text/70 font-light">
-                    Ketuk pada foto/video untuk menampilkan dalam mode layar penuh yang memukau.
+                    Ketuk pada foto untuk menampilkan layar penuh, atau putar video dokumentasi hangat Si Kecil.
                 </p>
             </div>
+
+            <div class="flex flex-wrap justify-center gap-2 mb-12 border-b border-brand-beige max-w-xl mx-auto pb-4">
+                <button @click="activeTab = 'basic'" :class="activeTab === 'basic' ? 'bg-brand-text text-white' : 'text-brand-text hover:bg-brand-beige'" class="px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition">
+                    Basic Wrap
+                </button>
+                <button @click="activeTab = 'thematic'" :class="activeTab === 'thematic' ? 'bg-brand-text text-white' : 'text-brand-text hover:bg-brand-beige'" class="px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition">
+                    Thematic Costume
+                </button>
+                <button @click="activeTab = 'family'" :class="activeTab === 'family' ? 'bg-brand-text text-white' : 'text-brand-text hover:bg-brand-beige'" class="px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition">
+                    Family Session
+                </button>
+                <button @click="activeTab = 'video'" :class="activeTab === 'video' ? 'bg-brand-text text-white' : 'text-brand-text hover:bg-brand-beige'" class="px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition">
+                    Video Doc
+                </button>
+            </div>
+
+            <div>
+                <div x-show="activeTab === 'basic'" class="masonry-grid" x-transition>
+                    <template x-for="(img, index) in basicImages" :key="index">
+                        <div class="masonry-item relative group overflow-hidden rounded-2xl bg-brand-cream cursor-pointer border border-brand-beige/40 shadow-sm" @click="openLightbox(img, false)">
+                            <img :src="img" alt="Foto Newborn Basic Wrap Dipi Photography" class="w-full h-auto object-cover transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-brand-text/10 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                                <span class="bg-white/90 text-brand-text px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest shadow-sm">Lihat Detail</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div x-show="activeTab === 'thematic'" class="masonry-grid" x-transition>
+                    <template x-for="(img, index) in thematicImages" :key="index">
+                        <div class="masonry-item relative group overflow-hidden rounded-2xl bg-brand-cream cursor-pointer border border-brand-beige/40 shadow-sm" @click="openLightbox(img, false)">
+                            <img :src="img" alt="Foto Newborn Thematic Costume Dipi Photography" class="w-full h-auto object-cover transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-brand-text/10 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                                <span class="bg-white/90 text-brand-text px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest shadow-sm">Lihat Detail</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div x-show="activeTab === 'family'" class="masonry-grid" x-transition>
+                    <template x-for="(img, index) in familyImages" :key="index">
+                        <div class="masonry-item relative group overflow-hidden rounded-2xl bg-brand-cream cursor-pointer border border-brand-beige/40 shadow-sm" @click="openLightbox(img, false)">
+                            <img :src="img" alt="Foto Keluarga Newborn Dipi Photography" class="w-full h-auto object-cover transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-brand-text/10 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                                <span class="bg-white/90 text-brand-text px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest shadow-sm">Lihat Detail</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div x-show="activeTab === 'video'" class="grid grid-cols-1 md:grid-cols-2 gap-8" x-transition>
+                    <template x-for="(vidId, index) in youtubeVideos" :key="index">
+                        <div class="relative rounded-3xl overflow-hidden bg-black aspect-video shadow-md border border-brand-beige/60 group">
+                            <iframe 
+                                class="w-full h-full" 
+                                :src="`https://www.youtube.com/embed/${vidId}`" 
+                                title="Dipi Photography Video Documentation" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe >
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div x-show="isOpen" class="fixed inset-0 z-50 bg-brand-text/95 backdrop-blur-sm flex items-center justify-center p-4" x-transition @keydown.escape.window="isOpen = false" style="display: none;">
+                <button @click="isOpen = false" class="absolute top-6 right-6 text-white text-3xl font-light hover:text-brand-pink transition" aria-label="Close Lightbox">×</button>
+                <div class="max-w-4xl max-h-[90vh] w-full flex items-center justify-center" @click.away="isOpen = false">
+                    <template x-if="!isVideo">
+                        <img :src="currentSrc" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl border border-white/10" alt="Lightbox Full View">
+                    </template>
+                </div>
+            </div>
+        </div>
+    </section>
 
             <!-- Filter Tabs -->
             <div class="flex flex-wrap justify-center gap-2 mb-12 border-b border-brand-beige max-w-xl mx-auto pb-4">
